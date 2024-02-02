@@ -6,7 +6,9 @@ import org.ckob.clock_register.repositories.ClockIntervalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClockIntervalService {
@@ -24,5 +26,23 @@ public class ClockIntervalService {
 
     public List<ClockInterval> getAllClockIntervals(){
         return this.clockIntervalRepository.findAll();
+    }
+
+    public ClockInterval setAutomaticallyClock(ClockIntervalDTO clockInterval){
+        LocalDateTime today = LocalDateTime.now();
+
+        Optional<ClockInterval> clockEnding = this.clockIntervalRepository.findFirstEmptyEnding();
+
+        if(clockEnding.isPresent()){
+            ClockInterval intervalToUpdate = clockEnding.get();
+            intervalToUpdate.setEnding(today);
+            return this.clockIntervalRepository.save(intervalToUpdate);
+        } else {
+            Long id_user = clockInterval.id_user();
+            ClockInterval newInterval = new ClockInterval();
+            newInterval.setId_user(id_user);
+            newInterval.setStart(today);
+            return this.clockIntervalRepository.save(newInterval);
+        }
     }
 }

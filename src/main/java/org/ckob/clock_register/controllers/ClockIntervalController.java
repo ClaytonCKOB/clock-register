@@ -29,4 +29,10 @@ public class ClockIntervalController {
     public ClockInterval createClockInterval(@RequestBody ClockIntervalDTO clockInterval){
         return clockIntervalService.createClockInterval(clockInterval);
     }
+
+    @PostMapping
+    @RequestMapping("/set-auto")
+    public ClockInterval setAutomaticallyClock(@RequestBody ClockIntervalDTO clockInterval){
+        return clockIntervalService.setAutomaticallyClock(clockInterval);
+    }
 }
