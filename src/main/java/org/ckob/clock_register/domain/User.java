@@ -1,22 +1,20 @@
 package org.ckob.clock_register.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.ckob.clock_register.dtos.UserDTO;
 import org.hibernate.annotations.IdGeneratorType;
 
-@Entity(name="user")
-@Table(name="user")
+@Entity(name="users")
+@Table(name="users")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(of="id")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;

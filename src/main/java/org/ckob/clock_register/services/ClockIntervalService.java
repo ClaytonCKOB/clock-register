@@ -1,20 +1,20 @@
 package org.ckob.clock_register.services;
 
 import org.ckob.clock_register.domain.ClockInterval;
-import org.ckob.clock_register.domain.User;
 import org.ckob.clock_register.dtos.ClockIntervalDTO;
-import org.ckob.clock_register.dtos.UserDTO;
 import org.ckob.clock_register.repositories.ClockIntervalRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ClockIntervalService {
+    @Autowired
     private ClockIntervalRepository clockIntervalRepository;
 
-    public ClockInterval createClockInterval(ClockIntervalDTO clockInteval){
-        ClockInterval newClockInterval = new ClockInterval(clockInteval);
+    public ClockInterval createClockInterval(ClockIntervalDTO clockInterval){
+        ClockInterval newClockInterval = new ClockInterval(clockInterval);
         return this.clockIntervalRepository.save(newClockInterval);
     }
 

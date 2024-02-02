@@ -4,7 +4,8 @@ import java.time.LocalDateTime;
 
 public record ClockIntervalDTO(
         Long id,
+        Long id_user,
         LocalDateTime start,
-        LocalDateTime end
+        LocalDateTime ending
 ) {
 }
