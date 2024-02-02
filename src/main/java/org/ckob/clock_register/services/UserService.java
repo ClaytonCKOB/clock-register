@@ -20,7 +20,7 @@ public class UserService {
     }
 
     public User getUser(Long id) throws Exception{
-        return this.userRepository.findById(id).orElseThrow(() -> new Exception("Usuario nao encontrado"));
+        return this.userRepository.findById(id).orElseThrow(() -> new Exception("User not found."));
     }
 
     public List<User> getAllUsers(){
