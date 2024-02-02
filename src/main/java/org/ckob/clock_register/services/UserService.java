@@ -7,6 +7,8 @@ import org.ckob.clock_register.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
@@ -14,7 +16,14 @@ public class UserService {
 
     public User createUser(UserDTO user){
         User newUser = new User(user);
+        return this.userRepository.save(newUser);
+    }
 
-        return this.userRepository.create(user);
+    public User getUser(Long id) throws Exception{
+        return this.userRepository.findById(id).orElseThrow(() -> new Exception("Usuario nao encontrado"));
+    }
+
+    public List<User> getAllUsers(){
+        return this.userRepository.findAll();
     }
 }
