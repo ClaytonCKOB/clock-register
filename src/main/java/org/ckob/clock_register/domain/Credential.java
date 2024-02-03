@@ -1,8 +1,6 @@
 package org.ckob.clock_register.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -20,6 +18,7 @@ import java.util.List;
 @EqualsAndHashCode(of="id")
 public class Credential implements UserDetails {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long id_user;
     private String username;
