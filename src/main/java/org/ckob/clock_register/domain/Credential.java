@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.ckob.clock_register.dtos.UserDTO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Collection;
 import java.util.List;
@@ -15,6 +17,8 @@ import java.util.List;
 @Table(name="credentials")
 @Entity(name="credentials")
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of="id")
 public class Credential implements UserDetails {
     @Id
@@ -24,6 +28,13 @@ public class Credential implements UserDetails {
     private String username;
     private String password;
     private Role role;
+
+    public Credential(UserDTO user, Long id_user){
+        this.id_user = id_user;
+        this.username = user.username();
+        this.password = new BCryptPasswordEncoder().encode(user.password());
+        this.role = user.role();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
