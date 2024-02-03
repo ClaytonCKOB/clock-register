@@ -20,6 +20,7 @@ jobs:
           POSTGRES_PASSWORD: admin
         ports:
           - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - name: Checkout code
@@ -31,18 +32,6 @@ jobs:
           java-version: '1.8'
           distribution: 'adopt'
           cache: maven
-
-      - name: Wait for PostgreSQL
-        run: |
-          timeout=300
-          until docker run --network=host postgres:latest pg_isready; do
-            timeout=$((timeout-1))
-            if [ $timeout -eq 0 ]; then
-              echo "PostgreSQL did not start in time."
-              exit 1
-            fi
-            sleep 1
-          done
 
       - name: Build with Maven and run tests
         run: mvn clean install -Ddb.url=jdbc:postgresql://localhost:5432/clockregister -Ddb.username=postgres -Ddb.password=admin
