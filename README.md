@@ -4,10 +4,10 @@ My work hours were recorded manually using spreadsheets, which was an inefficien
 
 #### [Initialization with Docker]()
 
-To init the postgres database, execute this command:
+To init the postgres database, go to the root of the project and execute this command:
 
 ```docker
-  docker run -e POSTGRES_PASSWORD=admin -p 5432:5432 postgres -d
+  docker compose up
 ```
 #### [API Documentation]()
 
