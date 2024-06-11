@@ -13,9 +13,7 @@ const Login = () => {
     }
 
     const handleChange = (event:any) => {
-        console.log(event.target.value);
         setForm({...form, [event.target.name]: event.target.value})
-        console.log(form);
     }
 
     return ( 

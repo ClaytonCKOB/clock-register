@@ -9,3 +9,14 @@ services:
       POSTGRES_DB: clockregister
       POSTGRES_PASSWORD: admin
       POSTGRES_USER: postgres
+
+  client:
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    working_dir: /usr/src/app
+    hostname: clockregister.com.br
+    volumes:
+      - ./client/:/usr/src/app
+    ports:
+      - '5173:5173'

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 @RequestMapping("api/clock")
 public class ClockIntervalController {
     @Autowired
@@ -34,5 +35,10 @@ public class ClockIntervalController {
     @RequestMapping("/set-auto")
     public ClockInterval setAutomaticallyClock(@RequestBody ClockIntervalDTO clockInterval){
         return clockIntervalService.setAutomaticallyClock(clockInterval);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteClockInterval(@PathVariable("id") Long idClockInterval) throws Exception {
+        clockIntervalService.deleteClockInterval(idClockInterval);
     }
 }

@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,7 +31,7 @@ class ClockIntervalRepositoryTest {
     @Test
     @DisplayName("Should find empty ending interval.")
     void findFirstEmptyEndingSucess() {
-        ClockInterval newInterval = this.createClockInterval(new ClockIntervalDTO(1L, 1L, LocalDateTime.now(), null));
+        ClockInterval newInterval = this.createClockInterval(new ClockIntervalDTO(1L, 1L, LocalDate.now(), LocalTime.now(), null, null));
 
         Optional<ClockInterval> interval = this.clockIntervalRepository.findFirstEmptyEnding();
 
@@ -38,7 +41,7 @@ class ClockIntervalRepositoryTest {
     @Test
     @DisplayName("Should not find empty ending interval.")
     void findFirstEmptyEndingNotFound() {
-        ClockInterval newInterval = this.createClockInterval(new ClockIntervalDTO(1L, 1L, LocalDateTime.now(),  LocalDateTime.now()));
+        ClockInterval newInterval = this.createClockInterval(new ClockIntervalDTO(1L, 1L, LocalDate.now(), LocalTime.now(), null, null));
 
         Optional<ClockInterval> interval = this.clockIntervalRepository.findFirstEmptyEnding();
 

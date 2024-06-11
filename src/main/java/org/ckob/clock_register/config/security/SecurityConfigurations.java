@@ -29,6 +29,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "api/user/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "api/auth/login").permitAll()
                         .requestMatchers(HttpMethod.GET).permitAll()
+                        .requestMatchers(HttpMethod.DELETE).permitAll()
                         .requestMatchers(HttpMethod.POST, "/clock").hasRole("ADMIM")
                         .anyRequest().authenticated()
                 )

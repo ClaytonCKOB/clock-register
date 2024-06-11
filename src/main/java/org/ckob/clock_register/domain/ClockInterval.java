@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.ckob.clock_register.dtos.ClockIntervalDTO;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity(name="clock_interval")
 @Table(name="clock_interval")
@@ -20,13 +22,19 @@ public class ClockInterval {
 
     private Long id_user;
 
-    private LocalDateTime start;
+    private LocalDate start_date;
 
-    private LocalDateTime ending;
+    private LocalTime start_time;
+
+    private LocalDate end_date;
+
+    private LocalTime end_time;
 
     public ClockInterval(ClockIntervalDTO clockInterval){
         this.id_user = clockInterval.id_user();
-        this.start = clockInterval.start();
-        this.ending = clockInterval.ending();
+        this.start_date = clockInterval.start_date();
+        this.start_time = clockInterval.start_time();
+        this.end_date = clockInterval.end_date();
+        this.end_time = clockInterval.end_time();
     }
 }

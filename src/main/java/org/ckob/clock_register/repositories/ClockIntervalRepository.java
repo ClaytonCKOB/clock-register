@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface ClockIntervalRepository extends JpaRepository<ClockInterval, Long> {
 
-    @Query("SELECT c FROM clock_interval c WHERE c.ending IS NULL")
+    @Query("SELECT c FROM clock_interval c WHERE c.end_date IS NULL")
     Optional<ClockInterval> findFirstEmptyEnding();
 }

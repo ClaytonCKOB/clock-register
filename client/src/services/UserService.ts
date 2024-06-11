@@ -5,7 +5,7 @@ export default class UserService {
 
     constructor () {
         this.axios = axios.create({
-            baseURL: process.env.ENDPOINT
+            baseURL: import.meta.env.ENDPOINT
         });
     }
 

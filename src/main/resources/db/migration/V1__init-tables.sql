@@ -5,6 +5,8 @@ CREATE TABLE users(
 CREATE TABLE clock_interval(
     id SERIAL PRIMARY KEY,
     id_user INT,
-    start timestamp,
-    ending timestamp
+    start_date date,
+    start_time time,
+    end_date date,
+    end_time time
 );
