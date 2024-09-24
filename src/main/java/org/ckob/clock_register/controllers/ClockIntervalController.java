@@ -1,9 +1,16 @@
 package org.ckob.clock_register.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 import org.ckob.clock_register.domain.ClockInterval;
 import org.ckob.clock_register.dtos.ClockIntervalDTO;
+import org.ckob.clock_register.producers.ClockIntervalProducer;
 import org.ckob.clock_register.repositories.ClockIntervalRepository;
 import org.ckob.clock_register.services.ClockIntervalService;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +20,10 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 @RequestMapping("api/clock")
 public class ClockIntervalController {
+
+    @Autowired
+    private ClockIntervalProducer clockIntervalProducer;
+
     @Autowired
     private ClockIntervalService clockIntervalService;
 
@@ -27,8 +38,8 @@ public class ClockIntervalController {
     }
 
     @PostMapping
-    public ClockInterval createClockInterval(@RequestBody ClockIntervalDTO clockInterval){
-        return clockIntervalService.createClockInterval(clockInterval);
+    public void createClockInterval(@RequestBody ClockIntervalDTO clockInterval) throws Exception{
+        clockIntervalProducer.sendCreateInterval(clockInterval);
     }
 
     @PostMapping

@@ -22,7 +22,7 @@ export default class ClockIntervalService {
     }
 
     async create(dados: object): any {
-        let token = '';
+        let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjbG9ja3JlZ2lzdGVyIiwic3ViIjoiY2xheXRvbmthdWEiLCJleHAiOjE3MTgyNDk3MTV9.WISGHYFeD3GYktfLbvT_MntSuDL3-cbjs4a5mGYAs3g';
         return this.axiosInstance.post('/api/clock', dados, {
             headers: { Authorization: `Bearer ${token}` }
         });
